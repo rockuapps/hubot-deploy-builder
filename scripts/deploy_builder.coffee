@@ -14,6 +14,7 @@
 #
 # Author:
 #   ryonext
+#   nozayasu
 
 module.exports = (robot) ->
   github = require("githubot")(robot)
