@@ -11,7 +11,7 @@
     "url": "https://github.com/rockuapps/hubot-deploy-builder.git"
   },
   "author": "rockuapps",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rockuapps/hubot-deploy-builder/issues"
   },
