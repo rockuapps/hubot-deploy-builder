@@ -26,20 +26,37 @@ RUn `npm install`
 Set these parameters for your environmental variable.
 
 * HUBOT_GITHUB_TOKEN
+(required)
 
 Set your GitHub access token.
 
 * HUBOT_GITHUB_USER
+(required)
 
 Set your GitHub user name.
 
 
 * HUBOT_GITHUB_ORG
+(required)
 
 Set your GitHub organization name.
 
-## Usage
+* HUBOT_DEPLOY_MESSAGE
+(optional)
 
+A message when a pull request is created.
+
+* HUBOT_NO_DIFFERENCE_MESSAGE
+(optional)
+
+A message in case there is no difference between two branches.
+
+* HUBOT_PR_EXISTS_MESSAGE
+(optional)
+
+A message in case a pull request is already exists.
+
+## Usage
 
 ```
 hubot deploy [your service]

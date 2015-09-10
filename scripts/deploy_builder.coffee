@@ -8,6 +8,9 @@
 # HUBOT_GITHUB_TOKEN
 # HUBOT_GITHUB_USER
 # HUBOT_GITHUB_ORG
+# HUBOT_DEPLOY_MESSAGE
+# HUBOT_NO_DIFFERENCE_MESSAGE
+# HUBOT_PR_EXISTS_MESSAGE
 #
 # Commands:
 #   hubot deploy <repo>
@@ -31,7 +34,7 @@ module.exports = (robot) ->
 
         update_data = { body: pr_body }
         github.patch response.url, update_data, (update_response) ->
-          msg.send "気合い！入れて！デプロイ！"
+          msg.send process.env.HUBOT_DEPLOY_MESSAGE || "Ship it!"
           msg.send update_response.html_url
 
   updatePrSummary = (url, msg) ->
@@ -52,7 +55,7 @@ module.exports = (robot) ->
   robot.respond /deploy ?(.+)/i, (msg) ->
     github.handleErrors (response) ->
       if response.body.indexOf("No commits") > -1
-          msg.send "差分無いよ(；´Д｀)"
+          msg.send process.env.HUBOT_NO_DIFFERENCE_MESSAGE || "There is no difference between two branches :("
     repo = msg.match[1]
     url_api_base = "https://api.github.com"
     data = {
@@ -65,7 +68,7 @@ module.exports = (robot) ->
     github.get url, data, (response) ->
       if response.length > 0
         api_url = "#{url_api_base}/repos/#{ghOrg}/#{repo}/pulls/#{response[0].number}"
-        msg.send "そのpull requestはもうあります。"
+        msg.send process.env.HUBOT_PR_EXISTS_MESSAGE || "This pull request already exists."
         updatePrSummary(api_url, msg)
       else
         createPullRequest(url, data)
