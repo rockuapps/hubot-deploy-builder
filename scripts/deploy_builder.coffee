@@ -34,7 +34,7 @@ module.exports = (robot) ->
 
         update_data = { body: pr_body }
         github.patch response.url, update_data, (update_response) ->
-          msg.send process.env.HUBOT_DEPLOY_MESSAGE || "Ship it!"
+          msg.send process.env.HUBOT_DEPLOY_MESSAGE || "Please deploy it!"
           msg.send update_response.html_url
 
   updatePrSummary = (url, msg) ->
