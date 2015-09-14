@@ -22,7 +22,7 @@
 module.exports = (robot) ->
   github = require("githubot")(robot)
 
-  createPullRequest = (url, data) ->
+  createPullRequest = (url, data, msg) ->
     github.post url, data, (response) ->
       commits_url = "#{response.commits_url}?per_page=100"
       github.get commits_url, (commits) ->
@@ -71,7 +71,7 @@ module.exports = (robot) ->
         msg.send process.env.HUBOT_PR_EXISTS_MESSAGE || "This pull request already exists."
         updatePrSummary(api_url, msg)
       else
-        createPullRequest(url, data)
+        createPullRequest(url, data, msg)
 
   robot.respond /update summary of deploy (\w+) (\d+)/i, (msg) ->
     repo = msg.match[1]
