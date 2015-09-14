@@ -19,7 +19,7 @@ Add hubot-deploy-builder to your `external-scripts.json`
 ["hubot-deploy-builder"]
 ```
 
-RUn `npm install`
+Run `npm install`
 
 ## Settings for GitHub
 
