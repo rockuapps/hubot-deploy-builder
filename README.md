@@ -41,6 +41,23 @@ Set your GitHub user name.
 
 Set your GitHub organization name.
 
+* HUBOT_BRANCH_FROM
+(optional)
+
+A branch which will be merged to HUBOT_BRANCH_TO.
+If omitted, "develop" is used.
+
+* HUBOT_BRANCH_TO
+(optional)
+
+A branch which will merge HUBOT_BRANCH_FROM.
+If omitted, "master" is used.
+
+* HUBOT_PR_EXISTS_MESSAGE
+(optional)
+
+A message in case a pull request is already exists.
+
 * HUBOT_DEPLOY_MESSAGE
 (optional)
 

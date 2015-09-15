@@ -11,6 +11,8 @@
 # HUBOT_DEPLOY_MESSAGE
 # HUBOT_NO_DIFFERENCE_MESSAGE
 # HUBOT_PR_EXISTS_MESSAGE
+# HUBOT_BRANCH_FROM
+# HUBOT_BRANCH_TO
 #
 # Commands:
 #   hubot deploy <repo>
@@ -60,8 +62,8 @@ module.exports = (robot) ->
     url_api_base = "https://api.github.com"
     data = {
       "title": "deploy",
-      "head": "develop",
-      "base": "master"
+      "head": process.env.HUBOT_BRANCH_FROM || "develop",
+      "base": process.env.HUBOT_BRANCH_TO || "master"
     }
     ghOrg = process.env.HUBOT_GITHUB_ORG
     url = "#{url_api_base}/repos/#{ghOrg}/#{repo}/pulls"
