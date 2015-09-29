@@ -54,7 +54,7 @@ module.exports = (robot) ->
           msg.send "updated PR summary"
           msg.send update_response.html_url
 
-  robot.respond /deploy ?(.+)/i, (msg) ->
+  robot.respond /deploy ?(\S+)\s*.*/i, (msg) ->
     github.handleErrors (response) ->
       if response.body.indexOf("No commits") > -1
           msg.send process.env.HUBOT_NO_DIFFERENCE_MESSAGE || "There is no difference between two branches :("
