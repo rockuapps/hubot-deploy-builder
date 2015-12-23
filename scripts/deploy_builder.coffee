@@ -54,16 +54,18 @@ module.exports = (robot) ->
           msg.send "updated PR summary"
           msg.send update_response.html_url
 
-  robot.respond /deploy ?(\S+)\s*.*/i, (msg) ->
+  robot.respond /deploy (\S+)\s*(\S*)?\s*(\S*)?/i, (msg) ->
+    repo = msg.match[1]
+    branch_from = msg.match[2] || process.env.HUBOT_BRANCH_FROM || "develop"
+    branch_to = msg.match[3] || process.env.HUBOT_BRANCH_TO || "master"
     github.handleErrors (response) ->
       if response.body.indexOf("No commits") > -1
           msg.send process.env.HUBOT_NO_DIFFERENCE_MESSAGE || "There is no difference between two branches :("
-    repo = msg.match[1]
     url_api_base = "https://api.github.com"
     data = {
       "title": "deploy",
-      "head": process.env.HUBOT_BRANCH_FROM || "develop",
-      "base": process.env.HUBOT_BRANCH_TO || "master"
+      "head": branch_from,
+      "base": branch_to
     }
     ghOrg = process.env.HUBOT_GITHUB_ORG
     url = "#{url_api_base}/repos/#{ghOrg}/#{repo}/pulls"
